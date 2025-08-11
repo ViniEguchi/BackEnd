@@ -1,0 +1,24 @@
+meta {
+  name: Herois Cad
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/herois
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nome": "Pegasus",
+      "poderes": "Meteoro",
+      "forca": 10000,
+      "aposentado": true
+    }
+}
+
+settings {
+  encodeUrl: true
+}

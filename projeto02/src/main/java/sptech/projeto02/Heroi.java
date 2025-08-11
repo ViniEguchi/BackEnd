@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Heroi {
     private String nome;
     private String poderes;
-    @JsonIgnore
+    //@JsonIgnore // essa anotação impede a geração desse atributo para todos os métodos HTTP
     private Double forca;
     private boolean aposentado;
 

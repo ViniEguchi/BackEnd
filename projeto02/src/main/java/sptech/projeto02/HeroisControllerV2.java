@@ -39,9 +39,16 @@ Para gerar as propriedades do JSON, o Spring Boot usa os getters
         return novo_heroi;
     }
 
-    @PostMapping
+    @PostMapping //URI: /herois
     public Heroi cadastrarHeroi(@RequestBody Heroi novoHeroi) {
         herois.add(novoHeroi);
         return novoHeroi;
+    }
+
+    @GetMapping("/aposentados")
+    public List<Heroi> getAposentados() {
+        return herois.stream()
+                .filter(Heroi::isAposentado)
+                .toList();
     }
 }
