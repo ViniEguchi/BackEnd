@@ -1,0 +1,25 @@
+meta {
+  name: Pet Cad
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8080/pets
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "id": 3,
+      "nomePet": "Cal",
+      "nomeDono": "Gui",
+      "especie": "Coelho",
+      "raca": "NDA"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

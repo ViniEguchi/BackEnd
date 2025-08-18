@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "BackEnd",
+  "name": "BackEnd Herois",
   "type": "collection",
   "ignore": [
     "node_modules",

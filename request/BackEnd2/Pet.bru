@@ -1,13 +1,17 @@
 meta {
-  name: Herois aposentados
+  name: Pet
   type: http
-  seq: 5
+  seq: 7
 }
 
 get {
-  url: http://localhost:8080/herois/aposentados
+  url: http://localhost:8080/pets?nome
   body: none
   auth: inherit
+}
+
+params:query {
+  nome: 
 }
 
 settings {

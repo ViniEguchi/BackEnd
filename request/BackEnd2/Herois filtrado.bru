@@ -1,0 +1,19 @@
+meta {
+  name: Herois filtrado
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:8080/herois?nome
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nome: 
+}
+
+settings {
+  encodeUrl: true
+}
