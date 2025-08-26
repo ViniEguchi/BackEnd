@@ -1,22 +1,23 @@
 meta {
-  name: Pet Cad
+  name: Pet Update
   type: http
-  seq: 8
+  seq: 10
 }
 
-post {
-  url: http://localhost:8080/pets
+put {
+  url: http://localhost:8080/pets/1
   body: json
   auth: inherit
 }
 
 body:json {
   {
+    "id": 1,
     "nomePet": "Rex",
     "nomeDono": "Ali",
     "especie": "Cachorro",
     "raca": "Labrador",
-    "emailDono": "ali@example.com",
+    "emailDono": "ali@email.com",
     "peso": 25.5,
     "altura": 0.6,
     "nascimento": "2020-05-10",
