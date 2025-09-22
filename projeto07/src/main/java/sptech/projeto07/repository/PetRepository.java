@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
+import sptech.projeto07.dto.PetSimplesResponse;
 import sptech.projeto07.model.Pet;
 
 import java.util.List;
@@ -29,6 +30,15 @@ public interface PetRepository
     List<Pet> findByNomeDonoContainsIgnoreCaseOrNomePetContainsIgnoreCase(
             String nomeDono, String nomePet
     );
+
+    @Query("""
+            SELECT p.id AS id,
+                   p.nomePet AS nome,
+                   p.nomeDono AS dono,
+                   p.raca.nome AS raca
+            FROM Pet p
+    """)
+    List<PetSimplesResponse> findAllSimples();
 
     List<Pet> findTop4ByOrderByPesoDesc();
 

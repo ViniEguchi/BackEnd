@@ -2,9 +2,11 @@ package sptech.projeto07.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import sptech.projeto07.dto.PetSimplesResponse;
 import sptech.projeto07.exception.PetProtegidoException;
 import sptech.projeto07.exception.QuantidadeMinimaPetsException;
 import sptech.projeto07.model.Pet;
@@ -13,6 +15,7 @@ import sptech.projeto07.repository.RegrasRepository;
 
 import java.util.List;
 
+@Slf4j // Anotação de Log do Lombok
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/pets")
@@ -40,6 +43,14 @@ public class PetController {
 //        this.regrasRepository = regrasRepository;
 //    }
 
+    @GetMapping("/simples")
+    public ResponseEntity<List<PetSimplesResponse>> getSimples() {
+        List<PetSimplesResponse> pets = repository.findAllSimples();
+        return pets.isEmpty()
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(pets);
+    }
+
     @GetMapping
     public ResponseEntity<List<Pet>> getPets(
             @RequestParam(required = false) String pesquisa
@@ -54,6 +65,8 @@ public class PetController {
             pets = repository
                     .findByNomeDonoContainsIgnoreCaseOrNomePetContainsIgnoreCase(pesquisa, pesquisa);
         }
+
+        log.info("Temos {} pets", pets.size());
 
         return pets.isEmpty()
                 ? ResponseEntity.status(204).build()
@@ -108,8 +121,7 @@ o .get() pode ser feito sem medo pois haverá valor
         }
     }
 
-    //
-//    // DELETE por Id
+    // DELETE por Id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePetPorId(@PathVariable Integer id) {
         // regra de exemplo: a api deve ter pelo menos N pets
