@@ -36,11 +36,11 @@ public interface PetRepository
 
     List<Pet> findByAtivoFalse();
 
-    int countByEspecieIgnoreCase(String especie);
+//    int countByEspecieIgnoreCase(String especie);
 
     // int deleteByRacaIgnoreCase(String raca);
 
-    boolean existsByEspecie(String especie);
+//    boolean existsByEspecie(String especie);
 
 
     /*

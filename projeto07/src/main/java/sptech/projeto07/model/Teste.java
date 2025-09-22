@@ -3,18 +3,18 @@ package sptech.projeto07.model;
 public class Teste {
     public static void main(String[] args) {
         // Os construtores são criados automaticamente para os Records
-        Especie e1 = new Especie("1", "cachorro");
-        Especie e2 = new Especie("1", "cachorro");
+//        Especie e1 = new Especie("1", "cachorro");
+//        Especie e2 = new Especie("1", "cachorro");
 
         // Os records possuem um toString implicito
-        System.out.println(e1);
-
+//        System.out.println(e1);
+//
         // Os recors possuem um equals implicito
-        System.out.println(e1.equals(e2));
-
+//        System.out.println(e1.equals(e2));
+//
         // Os Records são imutaveis
-        System.out.println(e1.codigo());
-        System.out.println(e1.nome());
+//        System.out.println(e1.codigo());
+//        System.out.println(e1.nome());
 
 
         Raca r1 = new Raca("1", "goldem");

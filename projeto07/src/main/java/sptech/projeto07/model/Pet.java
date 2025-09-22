@@ -2,10 +2,14 @@ package sptech.projeto07.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 public class Pet {
 
@@ -26,7 +30,8 @@ public class Pet {
     @Size(min = 3, max = 20)
     private String nomeDono;
 
-    private String especie;
+    @ManyToOne
+    private Especie especie;
 
     @ManyToOne
     private Raca raca;
@@ -52,14 +57,6 @@ public class Pet {
     // @FutureOrPresent
     private LocalDate validadeChip;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getNomePet() {
-        return nomePet;
-    }
-
 //    @CNPJ
 //    @TituloEleitoral
     @CPF // NÃO IMPORTA se tem ou não pontos e traços
@@ -73,52 +70,4 @@ public class Pet {
     private String telefoneDono;
 
     private boolean ativo = true;
-
-    public String getNomeDono() {
-        return nomeDono;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public Raca getRaca() {
-        return raca;
-    }
-
-    public String getEmailDono() {
-        return emailDono;
-    }
-
-    public Double getPeso() {
-        return peso;
-    }
-
-    public Double getAltura() {
-        return altura;
-    }
-
-    public LocalDate getNascimento() {
-        return nascimento;
-    }
-
-    public LocalDate getValidadeChip() {
-        return validadeChip;
-    }
-
-    public String getCpfDono() {
-        return cpfDono;
-    }
-
-    public String getTelefoneDono() {
-        return telefoneDono;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
 }
