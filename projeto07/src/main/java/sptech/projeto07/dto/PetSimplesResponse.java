@@ -9,4 +9,5 @@ public interface PetSimplesResponse {
     String getNome();
     String getDono();
     String getRaca();
+    String getEspecie();
 }

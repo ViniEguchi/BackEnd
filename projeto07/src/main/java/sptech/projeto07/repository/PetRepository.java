@@ -35,7 +35,8 @@ public interface PetRepository
             SELECT p.id AS id,
                    p.nomePet AS nome,
                    p.nomeDono AS dono,
-                   p.raca.nome AS raca
+                   p.raca.nome AS raca,
+                   p.especie.nome AS especie
             FROM Pet p
     """)
     List<PetSimplesResponse> findAllSimples();
