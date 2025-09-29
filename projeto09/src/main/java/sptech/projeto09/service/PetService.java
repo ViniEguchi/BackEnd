@@ -2,16 +2,21 @@ package sptech.projeto09.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import sptech.projeto09.dto.PetSimplesResponse;
 import sptech.projeto09.exception.DependenciaNaoEncontradaException;
 import sptech.projeto09.exception.PetProtegidoException;
 import sptech.projeto09.exception.QuantidadeMaximaPetsException;
 import sptech.projeto09.exception.QuantidadeMinimaPetsException;
 import sptech.projeto09.model.Pet;
+import sptech.projeto09.model.Raca;
 import sptech.projeto09.repository.EspecieRespository;
 import sptech.projeto09.repository.PetRepository;
 import sptech.projeto09.repository.RacaRespository;
 import sptech.projeto09.repository.RegrasRepository;
+
+import java.util.List;
 
 @Service // por padrão, toda Service é singleton
 @RequiredArgsConstructor
@@ -26,6 +31,28 @@ public class PetService {
 
     private final EspecieRespository especieRespository;
 
+    public List<PetSimplesResponse> listarSimples() {
+        return repository.findAllSimples();
+    }
+
+    public List<Pet> listar(String pesquisa) {
+        List<Pet> pets = null;
+
+        if (pesquisa == null) {
+            pets = repository.findAll();
+        } else {
+            pets = repository
+                    .findByNomeDonoContainsIgnoreCaseOrNomePetContainsIgnoreCase(pesquisa, pesquisa);
+        }
+
+        return pets;
+    }
+
+    public Pet obterPorCodigo(Integer codigo) {
+        return repository.findById(codigo)
+                .orElseThrow(() -> new DependenciaNaoEncontradaException("Pet"));
+    }
+
     public Pet salvar(Pet pet) {
         validarQuantidadeMaximaPets();
 
@@ -37,14 +64,7 @@ public class PetService {
             throw new DependenciaNaoEncontradaException("Espécie");
         }
 
-        /*
-        O save() do repository serve tanto para inserir
-        quanto para atualizar (se o id vier preenchido).
-        Ele retorna uma versão do objeto com o id
-        preenchido (no caso de insert).
-         */
-        Pet petSalvo = repository.save(pet);
-        return petSalvo;
+        return repository.save(pet);
     }
 
     private void validarQuantidadeMaximaPets() {
@@ -67,5 +87,25 @@ public class PetService {
         }
 
         repository.deleteById(codigo);
+    }
+
+    public Pet atualizar(Integer id, Pet pet) {
+        if (!repository.existsById(id)) {
+            throw new DependenciaNaoEncontradaException("Pet");
+        }
+        pet.setId(id);
+        return repository.save(pet);
+    }
+
+    public void desativar(Integer id) {
+        if (!repository.existsById(id)) {
+            throw new DependenciaNaoEncontradaException("Pet");
+        }
+
+        repository.desativarPorId(id);
+    }
+
+    public Raca relatorio() {
+        return racaRespository.findAll().getFirst();
     }
 }
