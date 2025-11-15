@@ -1,0 +1,28 @@
+meta {
+  name: Foto
+  type: http
+  seq: 15
+}
+
+patch {
+  url: http://localhost:8080/pets/foto/1
+  body: file
+  auth: inherit
+}
+
+body:json {
+  {
+    "dono": "João Silva",
+    "email": "joao.silva@example.com",
+    "telefone": "+5511998765432"
+  }
+  
+}
+
+body:file {
+  file: @file(/home/aoki/Pictures/Arquivos Digital Bank One/cartoes.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+}
