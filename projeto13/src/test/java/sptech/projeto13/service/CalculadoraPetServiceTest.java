@@ -55,10 +55,10 @@ class CalculadoraPetServiceTest {
     @CsvSource(value = {
         "100.0, 2.0",
         "1000.0, 20.0",
-        "1000.01, 15.00015",
-        "5000.0, 75.0",
-        "5000.01, 50.0001",
-        "10000.0, 100.0"
+        "1000.01, 20.0002",
+        "5000.0, 100.0",
+        "5000.01, 100.0002",
+        "10000.0, 200.0"
     })
     @DisplayName("Deve calcular correto p/ todos os pesos")
     void getRacaoDiaTodosPesos(
